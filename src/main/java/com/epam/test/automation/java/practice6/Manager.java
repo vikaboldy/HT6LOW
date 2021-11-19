@@ -3,7 +3,7 @@ package com.epam.test.automation.java.practice6;
 import java.math.BigDecimal;
 
 
-public abstract class Manager extends Employee {
+public class Manager extends Employee {
     private int quantity;
     public Manager(String name, BigDecimal salary, int clientAmount) {
         super(name, salary);
@@ -12,12 +12,17 @@ public abstract class Manager extends Employee {
     }
 
     public BigDecimal setBonus(BigDecimal bonus) {
-        if(quantity>100){
-            this.bonus=bonus.add(BigDecimal.valueOf(500));
-        }else if (quantity>150){
-            this.bonus=bonus.add(BigDecimal.valueOf(1000));
 
+        if(bonus==null||bonus.compareTo(BigDecimal.ZERO)<0){
+           throw new IllegalArgumentException();
+        }else if(quantity>150){
+            super.bonus=bonus.add(BigDecimal.valueOf(1000));
+        }else if (quantity>100){
+            super.bonus=bonus.add(BigDecimal.valueOf(500));
+
+        }else {
+            super.bonus=bonus;
         }
-        return bonus;
+        return super.bonus;
     }
 }
